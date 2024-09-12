@@ -30,4 +30,8 @@ Inside LAN, connect with `ssh username@private_ip`.\
 Outside LAN, you need to add NAT rules authorizing SSH communication with your home server. In your router settings add a rule for your server machine to use port 22 (internal and external) for communication. Then connect with `ssh username@public_ip`. Additionally, you may want to configure dynDNS (with eg. [no-IP](https://www.noip.com/)) in your router settings, then connect using your custom domain.
 
 ## File sync with rsync
-TODO
+Use [rsync](https://github.com/rsyncproject/rsync) to synchronize files across different devices that have ssh access to your server.\
+\
+(Optional) Set USR, ADDRESS, and FOLDER_NAME in `rsync/rsync_vars.sh` and then use the pull and push scripts to achieve this.\
+\
+![scripts demo](https://github.com/user-attachments/assets/b3535ac2-c721-49bb-8275-5231d842ad1e)
