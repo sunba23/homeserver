@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# for USERS_KEYS and IPS variables
+source VARIABLES
+
 # Save users and their key paths in a dictionary
-USERS_KEYS="/root/server/users_keys.txt"
 declare -A USER_KEYS
 while read -r username key_path; do
     USER_KEYS["$username"]+="$key_path "
@@ -47,6 +49,17 @@ sudo systemctl start sshd
 # Disable password authentication for SSH and allow only key-based authentication
 sudo sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 sudo sed -i 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# Install fail2ban
+cd
+sudo apt install git python3 python3-setuptools
+git clone https://github.com/fail2ban/fail2ban.git
+cd fail2ban
+sudo python3 setup.py install
+fail2ban-client version
+cp files/debian-initd /etc/init.d/fail2ban
+update-rc.d fail2ban defaults
+service fail2ban start
 
 # Restart sshd for auth changes to take effect
 sudo systemctl restart sshd

@@ -1,0 +1,8 @@
+# used by rsync scripts
+SSH_USER=
+SSH_ADDRESS=
+SYNC_FOLDER=
+# used by backup script
+BACKUP_DIR=
+INCLUDE_ITEMS_HOME=()
+INCLUDE_ITEMS_NON_HOME=()
